@@ -1,0 +1,36 @@
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Создание задачи</h2>
+  <form (submit)="addTask()">
+    <div class="mb-4">
+      <label for="title" class="block text-sm font-medium text-gray-700">Наименование:</label>
+      <input type="text" id="title" [(ngModel)]="task.title" name="text-title" required
+             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+    </div>
+    <div class="mb-4">
+      <label for="project" class="block text-sm font-medium text-gray-700">Проект:</label>
+      <input type="text" id="project" [(ngModel)]="task.project" name="text-project" required
+             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+    </div>
+    <div class="mb-4">
+      <label for="type" class="block text-sm font-medium text-gray-700">Тип:</label>
+      <input type="text" id="type" [(ngModel)]="task.type" name="text-type" required
+             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+    </div>
+    <div class="mb-4">
+      <label for="deadline" class="block text-sm font-medium text-gray-700">Крайний срок:</label>
+      <input type="date" id="deadline" [(ngModel)]="task.deadline" name="date-deadline" required
+             class="mt-1 block w-fit rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+    </div>
+    <div class="mb-4">
+      <label for="planned" class="block text-sm font-medium text-gray-700">Запланировано:</label>
+      <input type="datetime-local" id="planned" [(ngModel)]="task.planned" name="datetime-local-planned" required
+             class="mt-1 block w-fit rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+    </div>
+    <div class="mb-4">
+      <button type="submit"
+              class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-700">
+        Создать задачу
+      </button>
+    </div>
+  </form>
+</div>

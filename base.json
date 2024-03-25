@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "id": "b68b",
+      "name": "Amirkhon3223",
+      "password": "Amirkhon3223",
+      "email": "amir@gmail.com",
+      "role": "admin"
+    },
+    {
+      "id": "5b91",
+      "name": "Amirkhon0770",
+      "password": "123456789",
+      "email": "amir_amir@gmail.com",
+      "role": "user"
+    },
+    {
+      "id": "2460",
+      "name": "Naruto2000",
+      "password": "Naruto2000",
+      "email": "naruto_2000@gmail.com",
+      "role": "admin"
+    },
+    {
+      "id": "2a42",
+      "name": "Khujand0770",
+      "password": "Khujand0770",
+      "email": "Khujand0770@gmail.com",
+      "role": "user"
+    }
+  ],
+  "tasks": [
+    {
+      "title": "фывфывф",
+      "project": "вфывфы",
+      "type": "вфывфыв",
+      "deadline": "2024-03-14",
+      "planned": "2024-03-14T20:02",
+      "id": "a65a"
+    },
+    {
+      "id": "fcfd",
+      "title": "123123123123",
+      "project": "21312312312",
+      "type": "3123123123123",
+      "deadline": "2024-02-29",
+      "planned": "2024-03-22T20:14"
+    },
+    {
+      "id": "bb97",
+      "title": "0000000000000000000",
+      "project": "000000000000",
+      "type": "0000000000",
+      "deadline": "2024-03-15",
+      "planned": "2024-03-07T16:39"
+    }
+  ]
+}
