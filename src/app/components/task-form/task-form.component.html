@@ -2,33 +2,44 @@
   <h2 class="text-2xl font-bold mb-4">Создание задачи</h2>
   <form (submit)="addTask()">
     <div class="mb-4">
-      <label for="title" class="block text-sm font-medium text-gray-700">Наименование:</label>
-      <input type="text" id="title" [(ngModel)]="task.title" name="text-title" required
-             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+      <label class="block text-sm font-medium text-gray-700" for="title">Названия:</label>
+      <input [(ngModel)]="task.title"
+             class="mt-1 block w-full rounded-md border-2 border-gray-100 shadow-sm p-2 focus:outline-none focus:shadow-lg transition duration-200"
+             id="title" name="text-title" required
+             type="text">
     </div>
     <div class="mb-4">
-      <label for="project" class="block text-sm font-medium text-gray-700">Проект:</label>
-      <input type="text" id="project" [(ngModel)]="task.project" name="text-project" required
-             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+      <label class="block text-sm font-medium text-gray-700" for="project">Проект:</label>
+      <input [(ngModel)]="task.project"
+             class="mt-1 block w-full rounded-md border-2 border-gray-100 shadow-sm p-2 focus:outline-none focus:shadow-lg transition duration-200"
+             id="project" name="text-project" required
+             type="text">
     </div>
     <div class="mb-4">
-      <label for="type" class="block text-sm font-medium text-gray-700">Тип:</label>
-      <input type="text" id="type" [(ngModel)]="task.type" name="text-type" required
-             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+      <label class="block text-sm font-medium text-gray-700" for="type">Тип:</label>
+      <input [(ngModel)]="task.type"
+             class="mt-1 block w-full rounded-md border-2 border-gray-100 shadow-sm p-2 focus:outline-none focus:shadow-lg transition duration-200"
+             id="type" name="text-type" required
+             type="text">
     </div>
     <div class="mb-4">
-      <label for="deadline" class="block text-sm font-medium text-gray-700">Крайний срок:</label>
-      <input type="date" id="deadline" [(ngModel)]="task.deadline" name="date-deadline" required
-             class="mt-1 block w-fit rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+      <label class="block text-sm font-medium text-gray-700" for="deadline">Крайний срок:</label>
+      <input [(ngModel)]="task.deadline"
+             class="mt-1 block w-fit rounded-md border-2 border-gray-100 shadow-sm p-2 focus:outline-none focus:shadow-lg transition duration-200"
+             id="deadline" name="date-deadline" required
+             type="date">
     </div>
     <div class="mb-4">
-      <label for="planned" class="block text-sm font-medium text-gray-700">Запланировано:</label>
-      <input type="datetime-local" id="planned" [(ngModel)]="task.planned" name="datetime-local-planned" required
-             class="mt-1 block w-fit rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+      <label class="block text-sm font-medium text-gray-700" for="planned">Запланировано:</label>
+      <input [(ngModel)]="task.planned"
+             class="mt-1 block w-fit rounded-md border-2 border-gray-100 shadow-sm p-2 focus:outline-none focus:shadow-lg transition duration-200"
+             id="planned" name="datetime-local-planned" required
+             type="datetime-local">
     </div>
     <div class="mb-4">
-      <button type="submit"
-              class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-700">
+      <button
+        class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-700"
+        type="submit">
         Создать задачу
       </button>
     </div>

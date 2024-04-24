@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../interfaces/tasks-interface';
 import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { environment } from '../../environment/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:3000/tasks';
+  private apiUrl = `${environment.apiUrl}/tasks`;
   private taskAddedSubject = new Subject<void>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   addTask(task: Task): Observable<Task> {
     return this.http.post<Task>(this.apiUrl, task);
@@ -38,5 +39,4 @@ export class TaskService {
   notifyTaskAdded(): void {
     this.taskAddedSubject.next();
   }
-
 }

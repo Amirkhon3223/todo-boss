@@ -27,8 +27,22 @@ describe('TaskService', () => {
 
   it('getTasks() должен возвращать задачи', () => {
     const mockTasks: Task[] = [
-      { id: 1, title: 'Тестовая задача 1', project: 'Проект 1', type: 'Bug', deadline: '2021-01-01', planned: '2021-01-01T12:00' },
-      { id: 2, title: 'Тестовая задача 2', project: 'Проект 2', type: 'Feature', deadline: '2021-02-01', planned: '2021-02-01T12:00' }
+      {
+        id: 1,
+        title: 'Тестовая задача 1',
+        project: 'Проект 1',
+        type: 'Bug',
+        deadline: '2021-01-01',
+        planned: '2021-01-01T12:00'
+      },
+      {
+        id: 2,
+        title: 'Тестовая задача 2',
+        project: 'Проект 2',
+        type: 'Feature',
+        deadline: '2021-02-01',
+        planned: '2021-02-01T12:00'
+      }
     ];
 
     service.getTasks().subscribe(tasks => {
@@ -42,7 +56,13 @@ describe('TaskService', () => {
   });
 
   it('addTask() должен отправить POST-запрос и вернуть задачу', () => {
-    const newTask: Task = { title: 'Новая задача', project: 'Проект 3', type: 'Bug', deadline: '2021-03-01', planned: '2021-03-01T12:00' };
+    const newTask: Task = {
+      title: 'Новая задача',
+      project: 'Проект 3',
+      type: 'Bug',
+      deadline: '2021-03-01',
+      planned: '2021-03-01T12:00'
+    };
 
     service.addTask(newTask).subscribe(task => {
       expect(task).toEqual(newTask);

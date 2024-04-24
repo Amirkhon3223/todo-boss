@@ -9,7 +9,8 @@ export class FilterService {
   private selectedProjectSubject = new BehaviorSubject<string | null>(null);
   private selectedTypeSubject = new BehaviorSubject<string | null>(null);
 
-  constructor() {}
+  constructor() {
+  }
 
   /**
    * Устанавливает поисковый запрос для фильтрации задач.

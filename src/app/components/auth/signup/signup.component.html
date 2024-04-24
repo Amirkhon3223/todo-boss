@@ -4,30 +4,42 @@
     <div *ngIf="errorMessage" class="mb-4 text-red-500">{{ errorMessage }}</div>
 
     <div class="mb-4">
-      <label for="role" class="block mb-2">Select Role:</label>
-      <select id="role" [(ngModel)]="role" class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600">
+      <label class="block mb-2" for="role">Select Role:</label>
+      <select [(ngModel)]="role"
+              class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600"
+              id="role">
         <option value="admin">Admin</option>
         <option value="user">User</option>
       </select>
     </div>
 
     <div class="mb-4">
-      <label for="name" class="block mb-2">Name:</label>
-      <input type="text" id="name" [(ngModel)]="name" required class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600">
+      <label class="block mb-2" for="name">Name:</label>
+      <input [(ngModel)]="name"
+             class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600"
+             id="name" required
+             type="text">
     </div>
 
     <div class="mb-4">
-      <label for="email" class="block mb-2">Email:</label>
-      <input type="email" id="email" [(ngModel)]="email" required class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600">
+      <label class="block mb-2" for="email">Email:</label>
+      <input [(ngModel)]="email"
+             class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600"
+             id="email" required
+             type="email">
     </div>
 
     <div class="mb-4">
-      <label for="password" class="block mb-2">Password:</label>
-      <input type="password" id="password" [(ngModel)]="password" required class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600"
-             (change)="validatePassword()">
+      <label class="block mb-2" for="password">Password:</label>
+      <input (change)="validatePassword()" [(ngModel)]="password"
+             class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600"
+             id="password"
+             required
+             type="password">
     </div>
 
-    <button (click)="signup()" class="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded text-sm font-bold text-gray-50 transition duration-200">
+    <button (click)="signup()"
+            class="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded text-sm font-bold text-gray-50 transition duration-200">
       Регистрироваться
     </button>
 

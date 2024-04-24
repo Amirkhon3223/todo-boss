@@ -15,44 +15,109 @@
       "role": "user"
     },
     {
-      "id": "2460",
-      "name": "Naruto2000",
-      "password": "Naruto2000",
-      "email": "naruto_2000@gmail.com",
-      "role": "admin"
-    },
-    {
-      "id": "2a42",
-      "name": "Khujand0770",
-      "password": "Khujand0770",
-      "email": "Khujand0770@gmail.com",
+      "id": "9745",
+      "name": "DELL_XPS",
+      "password": "DELL_XPS",
+      "email": "DELL.XPS@gmail.com",
       "role": "user"
     }
   ],
   "tasks": [
     {
-      "title": "фывфывф",
-      "project": "вфывфы",
-      "type": "вфывфыв",
-      "deadline": "2024-03-14",
-      "planned": "2024-03-14T20:02",
-      "id": "a65a"
+      "id": "4e05",
+      "title": "Сделать тестовую задачу на ангуляр",
+      "project": "Todo Task Promo",
+      "type": "Frontend",
+      "deadline": "2024-04-27",
+      "planned": "2024-04-24T20:46"
     },
     {
-      "id": "fcfd",
-      "title": "123123123123",
-      "project": "21312312312",
-      "type": "3123123123123",
-      "deadline": "2024-02-29",
-      "planned": "2024-03-22T20:14"
+      "id": "76fa",
+      "title": "Разработать новую функциональность",
+      "project": "Project X",
+      "type": "Backend",
+      "deadline": "2024-05-05",
+      "planned": "2024-04-30T09:00"
     },
     {
-      "id": "bb97",
-      "title": "0000000000000000000",
-      "project": "000000000000",
-      "type": "0000000000",
-      "deadline": "2024-03-15",
-      "planned": "2024-03-07T16:39"
+      "id": "23b9",
+      "title": "Подготовить отчет для клиента",
+      "project": "Client Report",
+      "type": "Documentation",
+      "deadline": "2024-05-10",
+      "planned": "2024-05-07T14:30"
+    },
+    {
+      "id": "ac12",
+      "title": "Провести собрание с командой",
+      "project": "Team Meeting",
+      "type": "Meeting",
+      "deadline": "2024-05-08",
+      "planned": "2024-05-02T15:00"
+    },
+    {
+      "id": "a4b7",
+      "title": "Найти нового клиента",
+      "project": "Sales",
+      "type": "Business Development",
+      "deadline": "2024-05-08",
+      "planned": "2024-04-29T11:00"
+    },
+    {
+      "id": "fe89",
+      "title": "Подготовить презентацию для инвесторов",
+      "project": "Investor Pitch",
+      "type": "Presentation",
+      "deadline": "2024-05-15",
+      "planned": "2024-05-10T13:00"
+    },
+    {
+      "id": "1d8c",
+      "title": "Обновить дизайн лендинга",
+      "project": "Website Redesign",
+      "type": "Design",
+      "deadline": "2024-05-08",
+      "planned": "2024-05-03T09:30"
+    },
+    {
+      "id": "9f24",
+      "title": "Провести анализ рынка",
+      "project": "Market Research",
+      "type": "Research",
+      "deadline": "2024-05-08",
+      "planned": "2024-05-06T10:00"
+    },
+    {
+      "id": "b6d2",
+      "title": "Подготовить стратегию маркетинга",
+      "project": "Marketing Strategy",
+      "type": "Marketing",
+      "deadline": "2024-05-20",
+      "planned": "2024-05-13T14:00"
+    },
+    {
+      "id": "f68e",
+      "title": "Провести тестирование проекта X",
+      "project": "Project X",
+      "type": "Backend",
+      "deadline": "2024-05-07",
+      "planned": "2024-05-03T11:30"
+    },
+    {
+      "id": "ba47",
+      "title": "Провести анализ проекта X",
+      "project": "Project X",
+      "type": "Backend",
+      "deadline": "2024-05-10",
+      "planned": "2024-05-05T14:00"
+    },
+    {
+      "id": "c821",
+      "title": "Создать макеты интерфейса для Todo Task Promo",
+      "project": "Todo Task Promo",
+      "type": "Frontend",
+      "deadline": "2024-05-12",
+      "planned": "2024-05-08T09:00"
     }
   ]
 }

@@ -7,5 +7,6 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './task-add-modal.component.css'
 })
 export class TaskAddModalComponent {
-  constructor(public dialogRef: MatDialogRef<TaskAddModalComponent>) {}
+  constructor(public dialogRef: MatDialogRef<TaskAddModalComponent>) {
+  }
 }

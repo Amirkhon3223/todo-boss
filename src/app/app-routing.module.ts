@@ -24,11 +24,16 @@ const routes: Routes = [
     path: 'sign-up',
     component: SignupComponent
   },
-  { path: 'redirect-login', redirectTo: '/login', pathMatch: 'full' }
+  {
+    path: 'redirect-login',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

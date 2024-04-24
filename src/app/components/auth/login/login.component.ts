@@ -1,4 +1,3 @@
-// LoginComponent
 import { Component } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
@@ -10,28 +9,29 @@ import { HotToastService } from '@ngneat/hot-toast';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email: string = '';
+  name: string = '';
   password: string = '';
 
-
   constructor(
-    private authService: AuthService,
+    private _authService: AuthService,
     private router: Router,
     private toast: HotToastService,
-  ) {}
+  ) {
+  }
 
   login(): void {
-    this.authService.login(this.email, this.password)
+    this._authService.login(this.name, this.password)
       .subscribe(success => {
         if (success) {
-          const user = this.authService.getCurrentUser();
+          const user = this._authService.getCurrentUser();
           if (user) {
             this.router.navigate(['home']);
-            this.toast.success("Добро пожаловать!" + ' ' + user.name)
+            this.toast.success('Добро пожаловать!' + ' ' + user.name);
           }
         } else {
-          console.error('Login failed');
+          this.toast.error('Неправильное имя пользователя или пароль.');
         }
       });
   }
+
 }

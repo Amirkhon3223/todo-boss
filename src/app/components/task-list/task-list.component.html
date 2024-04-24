@@ -4,52 +4,55 @@
       <h1>Список задач</h1>
     </div>
     <div class="flex justify-between space-x-4">
-      <button *ngIf="isAdmin" (click)="deleteSelectedTasks()"
+      <button (click)="deleteSelectedTasks()" *ngIf="isAdmin"
               class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-             class="w-5 h-5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 15m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <span>Удалить</span>
       </button>
       <button (click)="openAddTaskDialog()"
               class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-             class="w-5 h-5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <span>Добавить задачу</span>
       </button>
     </div>
   </div>
+  
   <div class="-mx-4 overflow-x-auto">
     <div class="inline-block min-w-full align-middle">
       <div class="overflow-hidden rounded-lg px-10 py-3">
         <table class="min-w-full divide-y divide-gray-200 rounded-lg">
           <thead class="bg-gray-50">
           <tr>
-            <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 rounded-lg">
+            <th class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 rounded-lg" scope="col">
               <div class="flex items-center gap-x-3">
-                <input type="checkbox" [(ngModel)]="allTasksSelected" (change)="toggleAllTasksSelection()"
-                       class="text-blue-500 border-gray-300 rounded">
+                <input (change)="toggleAllTasksSelection()" [(ngModel)]="allTasksSelected"
+                       class="text-blue-500 border-gray-300 rounded"
+                       type="checkbox">
                 <span>Название</span>
               </div>
             </th>
-            <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center text-gray-500">Проект</th>
-            <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center text-gray-500">Тип</th>
-            <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center text-gray-500">Крайний срок</th>
-            <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center text-gray-500">Запланировано</th>
-            <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center text-gray-500 rounded-lg">Действя</th>
+            <th class="px-4 py-3.5 text-sm font-normal text-center text-gray-500" scope="col">Проект</th>
+            <th class="px-4 py-3.5 text-sm font-normal text-center text-gray-500" scope="col">Тип</th>
+            <th class="px-4 py-3.5 text-sm font-normal text-center text-gray-500" scope="col">Крайний срок</th>
+            <th class="px-4 py-3.5 text-sm font-normal text-center text-gray-500" scope="col">Запланировано</th>
+            <th class="px-4 py-3.5 text-sm font-normal text-center text-gray-500 rounded-lg" scope="col">Действя</th>
           </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-          <tr *ngFor="let task of tasks"
-              [id]="task.id" [class.highlighted]="task.id !== undefined && isTaskHighlighted(task.id)"
-              class="task-row rounded-lg" (click)="task.id !== undefined && highlightTask(task.id)">
+          <tr (click)="task.id !== undefined && highlightTask(task.id)"
+              *ngFor="let task of tasks" [class.highlighted]="task.id !== undefined && isTaskHighlighted(task.id)"
+              [id]="task.id" class="task-row rounded-lg">
             <td class="px-5 text-sm font-medium text-gray-700 text-center">
               <div class="flex items-center gap-x-3">
-                <input type="checkbox" [(ngModel)]="task.isSelected" (change)="updateSelectedTasks(task)"
-                       class="text-blue-500 border-gray-300 rounded">
+                <input (change)="updateSelectedTasks(task)" [(ngModel)]="task.isSelected"
+                       class="text-blue-500 border-gray-300 rounded"
+                       type="checkbox">
                 <td *ngIf="!task.isEditing; else displayTitle"
                     class="px-4 py-4 text-sm font-medium text-gray-700 text-center">
                   {{ task.title }}
@@ -85,7 +88,7 @@
 
             <!-- Крайний срок -->
             <td *ngIf="!task.isEditing; else displayDeadline" class="px-4 py-4 text-sm text-gray-500 text-center">
-              {{ task.deadline }}
+              {{ formatDate(task.deadline) }}
             </td>
             <ng-template #displayDeadline>
               <td class="px-4 py-4 text-sm text-gray-500 text-center">
@@ -95,7 +98,7 @@
 
             <!-- Запланировано -->
             <td *ngIf="!task.isEditing; else displayPlanned" class="px-4 py-4 text-sm text-gray-500 text-center">
-              {{ task.planned }}
+              {{ formatDate(task.planned) }}
             </td>
             <ng-template #displayPlanned>
               <td class="px-4 py-4 text-sm text-gray-500 text-center">

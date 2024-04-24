@@ -10,12 +10,14 @@ import { HotToastService } from '@ngneat/hot-toast';
   styleUrls: ['./task-form.component.css']
 })
 export class TaskFormComponent {
-  task: Task = { title: '', project: '', type: '', deadline: '', planned: '' };
+  task: Task = {title: '', project: '', type: '', deadline: '', planned: ''};
+
   constructor(
     private _taskService: TaskService,
     public dialogRef: MatDialogRef<TaskFormComponent>,
     private toast: HotToastService,
-  ) {}
+  ) {
+  }
 
   addTask(): void {
     this.task.planned = this.task.planned.toString();
@@ -24,13 +26,13 @@ export class TaskFormComponent {
       next: (newTask) => {
         console.log('New task added:', newTask);
         this.dialogRef.close();
-        this.task = { title: '', project: '', type: '', deadline: '', planned: '' };
+        this.task = {title: '', project: '', type: '', deadline: '', planned: ''};
         // Уведомляем сервис о добавлении новой задачи
         this._taskService.notifyTaskAdded();
-        this.toast.success("Новая задача добавлена");
+        this.toast.success('Новая задача добавлена');
       },
       error: (error) => {
-        this.toast.error("Ошибка, задача не добавилась");
+        this.toast.error('Ошибка, задача не добавилась');
         console.error('There was an error!', error);
       }
     });

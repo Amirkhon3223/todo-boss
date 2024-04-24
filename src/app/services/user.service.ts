@@ -9,10 +9,10 @@ export class UserService {
 
   private currentUserSubject = new BehaviorSubject<User | null>(null);
 
-  constructor() { }
+  constructor() {
+  }
 
   setCurrentUser(user: User): void {
     this.currentUserSubject.next(user);
   }
-
 }

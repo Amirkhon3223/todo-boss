@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../interfaces/tasks-interface';
 import { TaskAddModalComponent } from '../task-add-modal/task-add-modal.component';
@@ -6,25 +6,26 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { FilterService } from '../../services/filter.service';
-import { HeaderComponent } from '../header/header.component';
 import { HotToastService } from '@ngneat/hot-toast';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.css']
+  styleUrls: ['./task-list.component.css'],
+  providers: [DatePipe]
 })
 export class TaskListComponent implements OnInit, OnDestroy {
-  isAdmin: boolean = false;
+  isAdmin: boolean | null = false;
   tasks: Task[] = [];
   selectedTasks: Task[] = [];
   allTasksSelected = false;
-  private taskAddedSubscription!: Subscription;
-
   originalTasks: Task[] = [];
   searchQuery: string = '';
   selectedProject: string | null = null;
   selectedType: string | null = null;
+  highlightedTaskId: number | null = null;
+  private taskAddedSubscription!: Subscription;
 
   constructor(
     private _taskService: TaskService,
@@ -32,24 +33,26 @@ export class TaskListComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private _filterService: FilterService,
     private toast: HotToastService,
+    private datePipe: DatePipe
   ) {
+  }
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return this.datePipe.transform(date, 'dd.MM.yyyy') || '';
   }
 
   enableEditing(task: Task) {
     task.isEditing = true;
-    // Сохраняем оригинальные значения
-    task.originalValues = { ...task };
+    task.originalValues = {...task};
   }
 
   cancelEditing(task: Task) {
-    // Восстанавливаем оригинальные значения
     Object.assign(task, task.originalValues);
     task.isEditing = false;
   }
 
   saveTask(task: Task) {
-    // Здесь логика для сохранения изменений задачи
-    // Вызываем API для обновления задачи
     if (task.id) {
       this._taskService.updateTask(task.id, {
         title: task.title,
@@ -71,9 +74,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isAdmin = this._authService.isAdmin();
     this.getTasks();
-    // Подписка на событие добавления задачи
     this.taskAddedSubscription = this._taskService.taskAdded().subscribe(() => {
-      this.getTasks(); // Обновление списка задач
+      this.getTasks();
     });
 
     this._filterService.getSearchQuery().subscribe(query => {
@@ -92,7 +94,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Отписываемся от подписки при уничтожении компонента
     this.taskAddedSubscription.unsubscribe();
   }
 
@@ -126,7 +127,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
   }
 
   deleteSelectedTasks(): void {
-    if (this.isAdmin){
+    if (this.isAdmin) {
       this.selectedTasks.forEach(selectedTask => {
         if (selectedTask.id !== undefined) {
           this._taskService.deleteTask(selectedTask.id).subscribe(() => {
@@ -135,26 +136,19 @@ export class TaskListComponent implements OnInit, OnDestroy {
           });
         }
       });
-      // Очищаем список выбранных задач
       this.selectedTasks = [];
-      // Устанавливаем состояние главного чекбокса в false
       this.allTasksSelected = false;
-      // Обновляем состояние всех чекбоксов в списке
       this.tasks.forEach(task => task.isSelected = false);
-    }}
+    }
+  }
 
   toggleAllTasksSelection(): void {
-    // Проверяем, выбраны ли все задачи
     const allSelected = this.tasks.every(task => task.isSelected);
-    // Если все задачи уже выбраны, снимаем выбор со всех задач
     if (allSelected) {
       this.tasks.forEach(task => task.isSelected = false);
     } else {
-      // А Тут если не все задачи выбраны, выбираем все задачи
       this.tasks.forEach(task => task.isSelected = true);
     }
-
-    // Обновляем массив выбранных задач
     this.updateSelectedTasksArray();
   }
 
@@ -165,8 +159,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
   updateAllTasksSelected(): void {
     this.allTasksSelected = this.tasks.length > 0 && this.tasks.every(task => task.isSelected);
   }
-
-  highlightedTaskId: number | null = null; // Инициализация переменной для выделенной задачи
 
   highlightTask(taskId: number): void {
     this.highlightedTaskId = this.highlightedTaskId === taskId ? null : taskId;
@@ -183,11 +175,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
       filteredTasks = filteredTasks.filter(task => task.title.toLowerCase().includes(searchQuery.toLowerCase()));
     }
 
-    if (selectedProject) {
+    if (selectedProject && selectedProject !== 'Все проекты') {
       filteredTasks = filteredTasks.filter(task => task.project === selectedProject);
     }
 
-    if (selectedType) {
+    if (selectedType && selectedType !== 'Все типы') {
       filteredTasks = filteredTasks.filter(task => task.type === selectedType);
     }
 

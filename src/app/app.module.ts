@@ -29,20 +29,23 @@ import { CommonModule } from '@angular/common';
     HeaderComponent,
     TaskAddModalComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     CommonModule,
-    AppRoutingModule,
     HttpClientModule,
     MatDialogModule
   ],
+
   providers: [
-    provideHotToastConfig(),
     AuthService,
+    provideHotToastConfig(),
     provideAnimationsAsync(),
   ],
+
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

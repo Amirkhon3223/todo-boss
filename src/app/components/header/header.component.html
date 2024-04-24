@@ -12,32 +12,33 @@
       <div class="flex items-center lg:shrink-0 lg:flex-nowrap">
         <div class="relative flex items-center lg:ml-4 sm:mr-0 mr-2">
         <span class="absolute ml-4 leading-none -translate-y-1/2 top-1/2 text-muted">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-             class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
         </svg>
         </span>
           <input
-              [(ngModel)]="searchQuery" (input)="search()"
-              class="w-full py-3 pl-12 pr-4 text-base font-medium bg-white border border-solid outline-none rounded-2xl"
-              placeholder="Search..." type="text">
+            (input)="search()" [(ngModel)]="searchQuery"
+            class="w-full py-3 pl-12 pr-4 text-base font-medium bg-white border border-solid outline-none rounded-2xl"
+            placeholder="Search..." type="text">
         </div>
+
         <div class="relative flex items-center ml-2 lg:ml-4 px-5 space-x-4">
           <!-- Выпадающий список для выбора проекта -->
           <div>
-            <select [(ngModel)]="selectedProject" (change)="filter()"
+            <select (change)="filter()" [(ngModel)]="selectedProject"
                     class="w-full py-3 text-base font-medium bg-white border border-solid outline-none rounded-2xl">
-              <option [value]="null">Все проекты</option>
+              <option [ngValue]="null" selected>Все проекты</option>
               <option *ngFor="let project of projects" [value]="project">{{ project }}</option>
             </select>
           </div>
 
           <!-- Выпадающий список для выбора типа -->
           <div>
-            <select [(ngModel)]="selectedType" (change)="filter()"
+            <select (change)="filter()" [(ngModel)]="selectedType"
                     class="w-full py-3 text-base font-medium bg-white border border-solid outline-none rounded-2xl">
-              <option [value]="null">Все типы</option>
+              <option [ngValue]="null" selected>Все типы</option>
               <option *ngFor="let type of types" [value]="type">{{ type }}</option>
             </select>
           </div>
@@ -52,10 +53,11 @@
         <div class="relative flex items-center ml-2 lg:ml-4">
           <button (click)="onLogOut()"
                   class="flex items-center justify-center w-12 h-12 text-base font-medium leading-normal text-center align-middle transition-colors duration-150 ease-in-out bg-transparent border border-solid shadow-none cursor-pointer rounded-2xl text-stone-500 border-stone-200 hover:text-primary active:text-primary focus:text-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                 stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M16 9H8m2 5H6m14-7h-4a2 2 0 00-2 2v10a2 2 0 002 2h4a2 2 0 002-2V4a2 2 0 00-2-2z" />
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 9H8m2 5H6m14-7h-4a2 2 0 00-2 2v10a2 2 0 002 2h4a2 2 0 002-2V4a2 2 0 00-2-2z"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2"/>
             </svg>
           </button>
         </div>

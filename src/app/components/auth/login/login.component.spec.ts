@@ -1,67 +1,69 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms'; // добавляем FormsModule
 import { LoginComponent } from './login.component';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 import { of } from 'rxjs';
+import { User } from '../../../interfaces/user-interface';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
-  let authServiceSpy: jasmine.SpyObj<AuthService>;
-  let routerSpy: jasmine.SpyObj<Router>;
-
-  beforeEach(async(() => {
-    authServiceSpy = jasmine.createSpyObj('AuthService', ['login', 'getCurrentUser']);
-    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-
-    TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
-      providers: [
-        { provide: AuthService, useValue: authServiceSpy },
-        { provide: Router, useValue: routerSpy }
-      ],
-      imports: [FormsModule] // добавляем FormsModule в imports
-    })
-      .compileComponents();
-  }));
+  let authService: jasmine.SpyObj<AuthService>;
+  let router: jasmine.SpyObj<Router>;
+  let toast: jasmine.SpyObj<HotToastService>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    authService = jasmine.createSpyObj('AuthService', [
+      'login',
+      'getCurrentUser'
+    ]);
+    router = jasmine.createSpyObj('Router', ['navigate']);
+    toast = jasmine.createSpyObj('HotToastService', [
+      'success',
+      'error'
+    ]);
+
+    component = new LoginComponent(authService, router, toast);
   });
 
-  it('должен быть создан', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('login должен вызывать метод login сервиса и перенаправлять на домашнюю страницу при успешном входе', () => {
-    const testUser = { name: 'user', password: 'pass' };
-    authServiceSpy.login.and.returnValue(of(true));
-    authServiceSpy.getCurrentUser.and.returnValue(testUser);
+  it('should login successfully', () => {
+    const testUser: User = {
+      id: 1,
+      name: 'TestUser',
+      role: 'user',
+      email: 'test@example.com',
+      password: 'password'
+    };
+    authService.login.and.returnValue(of(true));
+    authService.getCurrentUser.and.returnValue(testUser);
 
-    component.email = 'test@example.com';
-    component.password = 'test';
-
+    component.name = 'test';
+    component.password = 'password';
     component.login();
 
-    expect(authServiceSpy.login).toHaveBeenCalledWith('test@example.com', 'test');
-    expect(authServiceSpy.getCurrentUser).toHaveBeenCalled();
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['home']);
+    expect(authService.login).toHaveBeenCalledWith('test', 'password');
+    expect(router.navigate).toHaveBeenCalledWith(['home']);
+    expect(toast.success).toHaveBeenCalledWith('Добро пожаловать! TestUser');
   });
 
-  it('login должен выводить ошибку в консоль при неудачном входе', () => {
-    authServiceSpy.login.and.returnValue(of(false));
-
-    component.email = 'test@example.com';
-    component.password = 'test';
-
-    spyOn(console, 'error');
+  it('should handle login failure', () => {
+    authService.login.and.returnValue(of(false));
 
     component.login();
 
-    expect(authServiceSpy.login).toHaveBeenCalledWith('test@example.com', 'test');
-    expect(console.error).toHaveBeenCalledWith('Login failed');
+    expect(authService.login).toHaveBeenCalled();
+    expect(toast.error).toHaveBeenCalledWith('Неправильное имя пользователя или пароль.');
+  });
+
+  it('should handle login error', () => {
+    authService.login.and.returnValue(of(false));
+
+    component.login();
+
+    expect(authService.login).toHaveBeenCalled();
+    expect(toast.error).toHaveBeenCalledWith('Неправильное имя пользователя или пароль.');
   });
 });

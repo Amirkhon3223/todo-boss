@@ -9,10 +9,14 @@ import { map } from 'rxjs/operators';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private _authService: AuthService,
+    private router: Router
+  ) {
+  }
 
   canActivate(): Observable<boolean> {
-    return this.authService.isLoggedIn$().pipe(
+    return this._authService.isLoggedIn$().pipe(
       map(isLoggedIn => {
         if (isLoggedIn) {
           return true;

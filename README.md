@@ -13,4 +13,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Запускаем Json-Server
 `json-server --watch base.json`</b> <br>
-<b>бедитесь чтоб сервер запустился на порте `3000`</b>
+<b>Убедитесь чтоб сервер запустился на порте `3000`</b>

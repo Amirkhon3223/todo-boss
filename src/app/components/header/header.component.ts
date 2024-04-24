@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../interfaces/tasks-interface';
 import { FilterService } from '../../services/filter.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -19,12 +20,18 @@ export class HeaderComponent implements OnInit {
   projects: string[] = [];
   types: string[] = [];
   originalTasks: Task[] = [];
+  isLoggedIn: boolean = false;
 
   constructor(
     private _authService: AuthService,
     private _taskService: TaskService,
-    private _filterService: FilterService
-  ) {}
+    private _filterService: FilterService,
+    private router: Router,
+  ) {
+    this._authService.isLoggedIn$().subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
+  }
 
   ngOnInit(): void {
     this.currentUser = this._authService.getCurrentUser();
@@ -53,16 +60,19 @@ export class HeaderComponent implements OnInit {
     return Array.from(new Set(this.tasks.map(task => task.type)));
   }
 
-
   search(): void {
     this._filterService.setSearchQuery(this.searchQuery);
   }
 
   /** Применяет выбранные проект и тип для фильтрации задач. */
   filter(): void {
+    this.selectedProject = this.selectedProject === 'Все проекты' ? null : this.selectedProject;
+    this.selectedType = this.selectedType === 'Все типы' ? null : this.selectedType;
+
     this._filterService.setSelectedProject(this.selectedProject);
     this._filterService.setSelectedType(this.selectedType);
   }
+
 
   /** Сбрасывает все фильтры и поисковый запрос. */
   resetFilters(): void {
@@ -74,9 +84,8 @@ export class HeaderComponent implements OnInit {
     this._filterService.setSelectedType(null);
   }
 
-  // Метод для выполнения выхода из системы
   onLogOut(): void {
     this._authService.logout();
-    window.location.reload();
+    this.router.navigate(['/login']);
   }
 }
